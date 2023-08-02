@@ -8,7 +8,7 @@
 
 struct fecha {
     int dia;
-    char mes[12];
+    char mes[12]; // arreglo de caracteres tamaño 12
     int anio;
     char bisiesto;
 };
