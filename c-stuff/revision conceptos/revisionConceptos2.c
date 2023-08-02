@@ -19,7 +19,7 @@ void main() {
 };
 
 // decir el tipo de las expresiones que se dan a continuación
-// i. arrE[5] ------> ARREGLO de tipo estr2
+// i. arrE[5] ------> struct estr2
 // ii. e[0].camp1 ------>  estructura de tipo estr1
 // iii. arrE[1].camp1.campo1 ------> int
 // iv. e[5].camp2 ------> int
