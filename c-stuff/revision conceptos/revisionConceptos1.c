@@ -11,7 +11,7 @@ struct fecha {
     char mes[12]; // arreglo de caracteres tamaño 12
     int anio;
     char bisiesto;
-};
+}; // 21 bytes
 
 main() {  // falta int main porque hay un return 0; al final
     struct fecha f1, f2; // admite no utilizar struct, es opcional
