@@ -14,7 +14,7 @@ struct fecha {
 };
 
 main() {  // falta int main porque hay un return 0; al final
-    struct fecha f1, f2;
+    struct fecha f1, f2; // admite no utilizar struct, es opcional
 
     f1.dia = 30;
     // f1.mes[0] = 'enero'; // no son las comillas correctas y no se puede
