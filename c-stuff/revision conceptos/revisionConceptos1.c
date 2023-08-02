@@ -25,9 +25,10 @@ main() {  // falta int main porque hay un return 0; al final
 
     f2.anio = f1.dia;
     f2.bisiesto = 'n';
-    printf("%d", f1.mes);
+    printf("%d", f1.mes); // tiene que usar %c y falta ñ
+la posicion del array
 
-    if (f2.anio < f1.anio) printf("%c", f2.mes);
+    if (f2.anio < f1.anio) printf("%c", f2.mes); // aca falta solo la posición del array 
 
     return 0;
 };
