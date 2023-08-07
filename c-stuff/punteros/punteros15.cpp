@@ -42,5 +42,10 @@ int main() {
 
     printf("%d", c.ptr_operador->prioridad);
 
+    // 17. .Supón ahora que la aplicación en la que se usan estas estructuras
+    // necesita almacenar la información para un máximo de 10 celdas.
+    // ¿Qué estructura de datos definirías?
+
+    // DEFINIRÍA: #define SIZE 100 y la usaría dentro de los brackets al declarar en la estructura.
     return 0;
 }
