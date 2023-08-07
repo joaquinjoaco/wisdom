@@ -3,13 +3,13 @@
 #define SIZE 100
 /* Información sobre la celda */
 struct informacion_celda {
-    char nombre[SIZE];                         /* Nombre de la celda */
-    unsigned int identificador;                /* Número identificador */
-    float calidad_senal;                       /* Calidad de la señal (entre 0 y 100) */
-    struct informacion_operador *ptr_operador; /* Puntero a una segunda estructura */
+    char nombre[SIZE];                  /* Nombre de la celda */
+    unsigned int identificador;         /* Número identificador */
+    float calidad_senal;                /* Calidad de la señal (entre 0 y 100) */
+    struct info_operador *ptr_operador; /* Puntero a una segunda estructura */
 };
 /* Información sobre el operador */
-struct informacion_operador {
+struct info_operador {
     char nombre[SIZE];           /* Cadena de texto con el nombre */
     unsigned int prioridad;      /* Prioridad de conexión */
     unsigned int ultima_comprob; /* Fecha de la última comprobación */
