@@ -37,7 +37,7 @@ int main() {
     imprimir(diferencia);
     cout << endl;
 
-    cout << "Largo del segmento: ";
+    cout << "Largo del segmento entre el primer y segundo punto: ";
     cout << largo;
     cout << endl;
 

@@ -28,6 +28,5 @@ void imprimir(punto pto);
 // Libera la memoria donde se encuentra guardado un punto
 void destruir(punto &pto);
 
-// todo: largo del segmento, origen
 
 #endif
