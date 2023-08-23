@@ -44,6 +44,7 @@ int main()
         cout << " 9 - imprimir\n";
         cout << "10 - eliminar\n";
         cout << "11 - destruir\n";
+        cout << "12 - maximo\n";
         cout << " 0 - salir\n\n";
         cout << "> ";
         
@@ -153,12 +154,18 @@ int main()
             else
                 cout << " - Debe crear la lista para usar el comando.\n";
         }
+         else if (opcion == 12){
+           if (creado)
+                cout << " - El maximo elemento es " << Max(l) << "\n";
+            else
+                cout << " - Debe crear la lista para usar el comando.\n";
+        }
         else if (opcion == 0){
             salir = true;
         }
         else
    			cout << " - comando incorrecto.\n";
-    } while (!salir);
+    }while (!salir);
    
 	cout << "\n\n\tCHAUUU!!!!\n";
 	l = destruir(l);
