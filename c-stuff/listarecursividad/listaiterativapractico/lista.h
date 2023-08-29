@@ -7,7 +7,7 @@
 // lista.h
 // Lista Simple de Enteros
 
-typedef struct nodo_lista * lista;
+typedef struct nodo_lista* lista;
 
 lista crear();
 // Crea la lista vacia.
@@ -45,5 +45,14 @@ int Max(lista l);
 // Retorna el máximo elemento de l.
 // Pre: l no es vacía.
 
-#endif
+float Average(lista l);
+// Retorna si la lista no es vacía el promedio de sus elementos.
+// Pre: l no es vacía.
 
+lista Insert(int x, lista l);
+// Inserta ordenadamente el elemento x en la lista ordenada l.
+
+bool Equals(lista l, lista p);
+// Verifica si las listas l y p son iguales (mismos elementos en el mismo orden).
+
+#endif
