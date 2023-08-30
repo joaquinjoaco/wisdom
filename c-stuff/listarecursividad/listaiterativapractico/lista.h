@@ -52,7 +52,7 @@ float Average(lista l);
 lista Insert(int x, lista l);
 // Inserta ordenadamente el elemento x en la lista ordenada l.
 
-bool Equals(lista l, lista p);
+bool Equals(lista l, lista l2);
 // Verifica si las listas l y p son iguales (mismos elementos en el mismo orden).
 
 #endif

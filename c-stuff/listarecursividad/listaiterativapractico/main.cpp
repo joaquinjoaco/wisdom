@@ -50,6 +50,8 @@ int main() {
         cout << "14 - crear 2\n";
         cout << "15 - imprimir 2\n";
         cout << "16 - cons 2\n";
+        cout << "17 - snoc 2\n";
+        cout << "18 - Equals 2\n";
         cout << " 0 - salir\n\n";
         cout << "> ";
 
@@ -171,8 +173,22 @@ int main() {
                 cin >> opcion;
                 l2 = cons(l2, opcion);
             } else
-                cout << " - Debe crear la lista para usar el comando.\n";
-        } else if (opcion == 0) {
+                cout << " - Debe crear la lista 2 pn ara usar el comando.\n";
+        } else if (opcion == 17) {
+            if (creado2) {
+                cout << " - Valor a ingresar: ";
+                cin >> opcion;
+                l2 = snoc(l2, opcion);
+            } else
+                cout << " - Debe crear la lista 2 para usar el comando.\n";
+        } else if (opcion == 18) {
+            if (creado && creado2) {
+                cout << Equals(l, l2);
+            } else
+                cout << " - Debe crear las dos listas para usar el comando.\n";
+        }
+
+        else if (opcion == 0) {
             salir = true;
         } else
             cout << " - comando incorrecto.\n";
