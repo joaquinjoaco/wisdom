@@ -162,16 +162,20 @@ lista elim(lista l, int elem) {
     lista current = l;
     lista prev = NULL;
     while (current->dato != elem &&
-           current != NULL) {    // si el usuario elige el primer elemento, entonces no entrara al while
+           current != NULL) {    // si el usuario elige el primer elemento,
+                                 // entonces no entrara al while
         prev = current;          // guardo el previo
         current = current->sig;  // avanzo en la lista
     }
 
     if (current->dato == elem) {
-        if (prev == NULL) {    // Si el previo es NULL es porque no entró al while, entonces estamos para borrar el primero
-            l = current->sig;  // hacemos un tail de la lista, la dejamos sin el primero
+        if (prev == NULL) {    // Si el previo es NULL es porque no entró al
+                               // while, entonces estamos para borrar el primero
+            l = current->sig;  // hacemos un tail de la lista, la dejamos sin el
+                               // primero
         } else {
-            prev->sig = current->sig;  // el previo ahora es el del siguiente al que borraremos.
+            prev->sig = current->sig;  // el previo ahora es el del siguiente al
+                                       // que borraremos.
         }
     }
 
@@ -179,31 +183,104 @@ lista elim(lista l, int elem) {
     return l;
 }
 
-lista destruir(lista l) {
-    delete l;
-}
-
-lista Insert(int x, lista l) {
-    // Inserta ordenadamente el elemento x en la lista ordenada l.
-}
-
 bool Equals(lista l, lista l2) {
-    // Verifica si las listas l y p son iguales (mismos elementos en el mismo orden).
+    // Verifica si las listas l y p son iguales (mismos elementos en el mismo
+    // orden).
 
     bool iguales = true;
 
     while (l != NULL && l2 != NULL && iguales == true) {
         if (l->dato != l2->dato) {
-            iguales = false;
+            iguales = false;  // son distintos
         }
-
+        // avanza en las listas
         l = l->sig;
         l2 = l2->sig;
     }
 
     if (l == NULL ^ l2 == NULL) {
-        iguales = false;
+        iguales =
+            false;  // a una de las listas le falta elementos, son distintas
     }
 
     return iguales;
 }
+
+lista Take(int i, lista l) {
+    // Retorna la lista resultado de tomar los primeros i elementos.
+    // l no comparte memoria con la lista resultado.
+    lista current = l;
+    lista result = NULL;
+
+    while (current != NULL && i > 0) {
+        // popula la lista resultado con los primeros i elementos,
+        // pero al mismo tiempo la invierte 5, 4, 3 ---> 3, 4, 5
+        result = cons(result, current->dato);
+        current = current->sig;
+        i--;
+    }
+
+    lista reversedResult = NULL;
+    while (result !=
+           NULL) {  // se invierte la lista resultado 3, 4, 5 ---> 5, 4, 3
+        reversedResult = cons(reversedResult, result->dato);
+        result = result->sig;
+    }
+
+    return reversedResult;
+}
+
+lista Drop(int u, lista l) {
+    // Retorna la lista resultado de no tomar los primeros u elementos.
+    // l no comparte memoria con la lista resultado.
+
+    lista resultado = l;
+    while (resultado != NULL && u > 0) {
+        resultado = resultado->sig;
+        u--;
+    }
+
+    return resultado;
+}
+
+lista Merge(lista l, lista p) {
+    // Genera una lista fruto de intercalar ordenadamente las listas.
+    // l y p que vienen ordenadas.
+    // l y p no comparten memoria con la lista resultado.
+
+    lista resultado = NULL;
+    lista currentL = l;
+    lista currentP = p;
+
+    while (currentL != NULL && currentP != NULL) {
+        // se inserta intercaladamente, primero L y despues P
+        resultado = cons(resultado, currentL->dato);
+        resultado = cons(resultado, currentP->dato);
+        // se avanza en las listas
+        currentL = currentL->sig;
+        currentP = currentP->sig;
+    }
+
+    // Si quedan elementos de 'l' los terminaremos de insertar
+    while (currentL != NULL) {
+        resultado = cons(resultado, currentL->dato);
+        currentL = currentL->sig;
+    }
+    // Si quedan elementos de 'p' los terminaremos de insertar
+    while (currentP != NULL) {
+        resultado = cons(resultado, currentP->dato);
+        currentP = currentP->sig;
+    }
+
+    // Invertimos la lista resultante ya que al insertarlos se invierte el orden
+    // Basicamente insertamos todos los datos nuevamente pero en otra lista, y se invierten.
+    lista reversedResult = crear();
+    while (resultado != NULL) {
+        reversedResult = cons(reversedResult, resultado->dato);
+        resultado = resultado->sig;
+    }
+
+    return reversedResult;
+}
+
+lista destruir(lista l) { delete l; }
