@@ -55,6 +55,7 @@ int main() {
         cout << "19 - Take\n";
         cout << "20 - Drop\n";
         cout << "21 - Merge 1 & 2\n";
+        cout << "22 - Append 2 to 1\n";
         cout << " 0 - salir\n\n";
         cout << "> ";
 
@@ -176,7 +177,7 @@ int main() {
                 cin >> opcion;
                 p = cons(p, opcion);
             } else
-                cout << " - Debe crear la lista 2 pn ara usar el comando.\n";
+                cout << " - Debe crear la lista 2 para usar el comando.\n";
         } else if (opcion == 17) {
             if (creado2) {
                 cout << " - Valor a ingresar: ";
@@ -191,27 +192,35 @@ int main() {
                 cout << " - Debe crear las dos listas para usar el comando.\n";
         } else if (opcion == 19) {
             if (creado) {
-                cout << " - Cuantos elementos tomar (se guardara en lista 2): ";
+                cout << " - Cuantos elementos tomar de la primer lista: ";
                 cin >> opcion;
-                p = Take(opcion, l);
-                creado2 = true;
-                imprimir_lista(p);
+                imprimir_lista(Take(opcion, l));
             } else
-                cout << " - Debe crear las dos listas para usar el comando.\n";
+                cout << " - Debe crear la lista 1 para usar el comando.\n";
         } else if (opcion == 20) {
             if (creado) {
-                cout << " - Cuantos elementos no tomar (se guardara en lista 2): ";
+                cout << " - Cuantos elementos no tomar tomar de la primer lista: ";
                 cin >> opcion;
-                p = Drop(opcion, l);
-                creado2 = true;
-                imprimir_lista(p);
+                imprimir_lista(Drop(opcion, l));
             } else
-                cout << " - Debe crear las dos listas para usar el comando.\n";
+                cout << " - Debe crear la lista 1 para usar el comando.\n";
         } else if (opcion == 21) {
             if (creado && creado2) {
                 imprimir_lista(Merge(l, p));
             } else
                 cout << " - Debe crear las dos listas para usar el comando.\n";
+        } else if (opcion == 22) {
+            if (creado && creado2) {
+                imprimir_lista(Append(l, p));
+            } else
+                cout << " - Debe crear las dos listas para usar el comando.\n";
+        } else if (opcion == 23) {
+            if (creado) {
+                cout << " - Cuantos elementos tomar de la primer lista: ";
+                cin >> opcion;
+                imprimir_lista(Take(opcion, l));
+            } else
+                cout << " - Debe crear la lista 1 para usar el comando.\n";
         }
 
         else if (opcion == 0) {

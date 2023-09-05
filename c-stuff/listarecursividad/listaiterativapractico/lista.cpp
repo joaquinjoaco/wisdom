@@ -273,14 +273,74 @@ lista Merge(lista l, lista p) {
     }
 
     // Invertimos la lista resultante ya que al insertarlos se invierte el orden
-    // Basicamente insertamos todos los datos nuevamente pero en otra lista, y se invierten.
-    lista reversedResult = crear();
+    // Basicamente insertamos todos los datos nuevamente pero en otra lista, y
+    // se invierten.
+    lista reversedResult = NULL;
     while (resultado != NULL) {
         reversedResult = cons(reversedResult, resultado->dato);
         resultado = resultado->sig;
     }
 
     return reversedResult;
+}
+
+lista Append(lista l, lista p) {
+    // Agrega la lista p al final de la lista l.
+    // l y p no comparten memoria con la lista resultado.
+
+    lista resultado = l;
+
+    if (l == NULL) {
+        resultado = p;
+
+    } else {
+        lista current = resultado;
+        // estoy haciendo un puntero a "l" con el que voy a poder enlazar un
+        // nuevo nodo al final de "l"
+        while (current->sig != NULL) {
+            current = current->sig;  // avanza hasta el ultimo nodo
+        }
+
+        current->sig = p;  // en la ultima posición añade la lista p
+    }
+
+    return resultado;
+}
+
+lista TakeRecursivo(int i, lista l) {
+    // Retorna la lista resultado de tomar los primeros i elementos.
+    // l no comparte memoria con la lista resultado.
+
+    if (isEmpty(l) || i <= 0) {
+        // si la lista es vacía o nuestro i es 0 o negativo, devolvemos una
+        // lista nula
+        lista result = crear();
+        return result;
+
+    } else {
+        lista primerElemento = crear();  // creamos una lista para ponerle los
+                                         // primeros elementos de l
+        primerElemento = cons(primerElemento, head(l));
+
+        // "Concatenamos" estos primeros elementos sucesivamente Append va al
+        // final de primerElemento y le da el primer elemento del tail(l)
+        return Append(primerElemento, TakeRecursivo(i - 1, tail(l)));
+    }
+}
+
+lista DropRecursivo(int u, lista l) {
+    // Retorna la lista resultado de no tomar los primeros u elementos.
+    // l no comparte memoria con la lista resultado.
+
+    if (isEmpty(l) || u <= 0) {
+        // si la lista es vacía o nuestro i es 0 o negativo, devolvemos una
+        // lista nula
+        lista result = l;
+        return result;
+
+    } else {
+        return DropRecursivo(u - 1, tail(l));
+    }
 }
 
 lista destruir(lista l) { delete l; }
