@@ -11,12 +11,10 @@
 struct nodo_lista {
     int dato;
     lista sig;
-    // int cantidad;
 };
 
 lista crear() {
     // Crea la lista vacia.
-    // *ya es "iterativo"*
     return NULL;
 }
 
@@ -48,27 +46,32 @@ lista snoc(lista l, int n) {
             cons(current->sig, n);  // en la ultima posición añade un nuevo nodo
     }
     return l;  // retorna "l" modificada con el nuevo nodo al final
+}
 
-    // sin procedimientos auxiliares
-    // if (l == NULL) {
-    //     lista aux = new (nodo_lista);
-    //     aux->dato = n;
-    //     aux->sig = NULL;
-    //     l = aux;
+lista Insert(int x, lista l) {
+    // Inserta ordenadamente el elemento x en la lista ordenada l.
+    lista actual, ant;
+    actual = l;
+    ant = NULL;
+    while ((actual != NULL) && (actual->dato > x)) {
+        ant = actual;
+        actual = actual->sig;
+    }
 
-    // } else {
-    //     lista current = l;
+    lista aux = new (nodo_lista);
+    aux->dato = x;
+    aux->sig = actual;
+    if (ant != NULL) {
+        ant->sig = aux;
+    } else {
+        l = aux;
+    }
 
-    //     while (current->sig != NULL) {
-    //         current = current->sig;
-    //     }
+    return l;
+}
 
-    //     lista aux = new (nodo_lista);
-    //     current->sig = aux; // se inserta un nuevo nodo al final de "l"
-    //     (current es puntero de l) aux->dato = n; aux->sig = NULL;
-    // }
-
-    // return l;
+lista sort(lista l) {
+    // Ordena la lista.
 }
 
 int head(lista l) {
@@ -287,24 +290,37 @@ lista Merge(lista l, lista p) {
 lista Append(lista l, lista p) {
     // Agrega la lista p al final de la lista l.
     // l y p no comparten memoria con la lista resultado.
-
-    lista resultado = l;
+    lista resultado = NULL;
+    lista reversedResult = NULL;
 
     if (l == NULL) {
         resultado = p;
 
     } else {
-        lista current = resultado;
-        // estoy haciendo un puntero a "l" con el que voy a poder enlazar un
-        // nuevo nodo al final de "l"
-        while (current->sig != NULL) {
-            current = current->sig;  // avanza hasta el ultimo nodo
+        lista currentL = l;
+
+        // construyo resultado con los elementos de "l"
+        while (currentL != NULL) {
+            resultado = cons(resultado, currentL->dato);
+            currentL = currentL->sig;
+        }
+        // invierto el orden del resultado
+        while (resultado != NULL) {
+            reversedResult = cons(reversedResult, resultado->dato);
+            resultado = resultado->sig;
         }
 
-        current->sig = p;  // en la ultima posición añade la lista p
+        lista currentRes = reversedResult;
+        // Hago un puntero a "reversedResult" con el que voy a poder
+        // enlazar un nuevo nodo al final de "reversedResult"
+        while (currentRes->sig != NULL) {
+            currentRes = currentRes->sig;  // avanza hasta el ultimo nodo
+        }
+
+        currentRes->sig = p;  // en la ultima posición añade la lista p
     }
 
-    return resultado;
+    return reversedResult;
 }
 
 lista TakeRecursivo(int i, lista l) {
@@ -322,7 +338,7 @@ lista TakeRecursivo(int i, lista l) {
                                          // primeros elementos de l
         primerElemento = cons(primerElemento, head(l));
 
-        // "Concatenamos" estos primeros elementos sucesivamente Append va al
+        // "Concatenamos" estos primeros elementos sucesivamente. Append va al
         // final de primerElemento y le da el primer elemento del tail(l)
         return Append(primerElemento, TakeRecursivo(i - 1, tail(l)));
     }
@@ -340,6 +356,30 @@ lista DropRecursivo(int u, lista l) {
 
     } else {
         return DropRecursivo(u - 1, tail(l));
+    }
+}
+
+lista MergeRecursivo(lista l, lista p) {
+    // Genera una lista fruto de intercalar ordenadamente las listas.
+    // l y p que vienen ordenadas.
+    // l y p no comparten memoria con la lista resultado.
+}
+
+lista AppendRecursivo(lista l, lista p) {
+    // Agrega la lista p al final de la lista l.
+    // l y p no comparten memoria con la lista resultado.
+
+    if (isEmpty(l)) {
+        if (isEmpty(p)) {
+            return NULL;  // cuando "l" es vacía y "p" también lo es, retornamos una lista vacía.
+        } else {
+            // cuando "l" es vacía y "p" todavía tiene elementos, hacemos una constructora para resultado donde insertaremos los elementos que queden de "p".
+            lista resultado = cons(AppendRecursivo(NULL, tail(p)), head(p));
+        }
+    } else {
+        // cuando "l" tiene elementos, hacemos una constructora para resultado donde insertaremos todos los elementos de "l" (para que resultado y "l" no compartan memoria).
+        lista resultado = cons(AppendRecursivo(tail(l), p), head(l));
+        return resultado;
     }
 }
 

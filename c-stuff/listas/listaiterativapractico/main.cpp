@@ -39,7 +39,8 @@ int main() {
         cout << " 3 - tail\n";
         cout << " 4 - cons\n";
         cout << " 5 - snoc\n";
-        cout << " 6 - vacia\n";
+        // cout << " 6 - vacia\n";
+        cout << " 6 - Insert\n";
         cout << " 7 - pertenece\n";
         cout << " 8 - cantidad\n";
         cout << " 9 - imprimir\n";
@@ -102,12 +103,21 @@ int main() {
                 l = snoc(l, opcion);
             } else
                 cout << " - Debe crear la lista para usar el comando.\n";
-        } else if (opcion == 6) {
+        }
+        //  else if (opcion == 6) {
+        //     if (creado) {
+        //         if (isEmpty(l))
+        //             cout << " - La lista es vacia.\n";
+        //         else
+        //             cout << " - La lista es NO vacia.\n";
+        //     } else
+        //         cout << " - Debe crear la lista para usar el comando.\n";
+        // }
+        else if (opcion == 6) {
             if (creado) {
-                if (isEmpty(l))
-                    cout << " - La lista es vacia.\n";
-                else
-                    cout << " - La lista es NO vacia.\n";
+                cout << " - Valor a ingresar: ";
+                cin >> opcion;
+                l = Insert(opcion, l);
             } else
                 cout << " - Debe crear la lista para usar el comando.\n";
         } else if (opcion == 7) {
@@ -218,9 +228,26 @@ int main() {
             if (creado) {
                 cout << " - Cuantos elementos tomar de la primer lista: ";
                 cin >> opcion;
-                imprimir_lista(Take(opcion, l));
+                imprimir_lista(TakeRecursivo(opcion, l));
             } else
                 cout << " - Debe crear la lista 1 para usar el comando.\n";
+        } else if (opcion == 24) {
+            if (creado) {
+                cout << " - Cuantos elementos no tomar de la primer lista: ";
+                cin >> opcion;
+                imprimir_lista(DropRecursivo(opcion, l));
+            } else
+                cout << " - Debe crear la lista 1 para usar el comando.\n";
+        } else if (opcion == 25) {
+            if (creado && creado2) {
+                imprimir_lista(MergeRecursivo(l, p));
+            } else
+                cout << " - Debe crear las dos listas para usar el comando.\n";
+        } else if (opcion == 26) {
+            if (creado && creado2) {
+                imprimir_lista(AppendRecursivo(l, p));
+            } else
+                cout << " - Debe crear las dos listas para usar el comando.\n";
         }
 
         else if (opcion == 0) {

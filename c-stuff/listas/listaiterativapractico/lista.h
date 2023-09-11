@@ -18,6 +18,12 @@ lista cons(lista l, int n);
 lista snoc(lista l, int n);
 // Inserta n al final de l.
 
+lista Insert(int x, lista l);
+// Inserta ordenadamente el elemento x en la lista ordenada l.
+
+lista sort(lista l);
+// Ordena la lista.
+
 int head(lista l);
 // Retorna el primer elemento de la lista.
 // Pre: l no vacia.
@@ -76,5 +82,14 @@ lista TakeRecursivo(int i, lista l);
 lista DropRecursivo(int u, lista l);
 // Retorna la lista resultado de no tomar los primeros u elementos.
 // l no comparte memoria con la lista resultado.
+
+lista MergeRecursivo(lista l, lista p);
+// Genera una lista fruto de intercalar ordenadamente las listas.
+// l y p que vienen ordenadas.
+// l y p no comparten memoria con la lista resultado.
+
+lista AppendRecursivo(lista l, lista p);
+// Agrega la lista p al final de la lista l.
+// l y p no comparten memoria con la lista resultado.
 
 #endif
