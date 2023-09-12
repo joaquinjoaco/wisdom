@@ -22,9 +22,8 @@ void imprimir_lista(lista l) {
 int main() {
     bool salir = false;
     bool creado = false;
-    //     bool creado2 = false;
-    lista l;
-    //     lista p;
+    bool creado2 = false;
+    lista l, p;
     int opcion;
 
     do {
@@ -32,11 +31,18 @@ int main() {
         cout << " 2 - head\n";
         cout << " 3 - tail\n";
         cout << " 4 - cons\n";
-        cout << " 5 - IsElement\n";
-        cout << " 6 - Remove\n";
-        cout << " 7 - Length\n";
-        cout << " 9 - Imprimir lista\n";
-        cout << " 0 - Salir\n";
+        cout << " 5 - isElement\n";
+        cout << " 6 - remove\n";
+        cout << " 7 - length\n";
+        cout << " 8 - snoc\n";
+        cout << " 9 - imprimir lista\n";
+        cout << " 10 - crear lista 2\n";
+        cout << " 14 - cons 2\n";
+        cout << " 15 - append 2 to 1\n";
+        cout << " 16 - last\n";
+        cout << " 17 - how many\n";
+        cout << " 19 - imprimir lista 2\n";
+        cout << " 0 - salir\n";
         cout << "> ";
 
         cin >> opcion;
@@ -79,7 +85,7 @@ int main() {
             if (creado) {
                 cout << " - Valor a buscar: ";
                 cin >> opcion;
-                if (IsElement(opcion, l)) {
+                if (isElement(opcion, l)) {
                     cout << opcion << " pertenece a la lista";
                 } else {
                     cout << opcion << " NO pertenece a la lista";
@@ -90,8 +96,8 @@ int main() {
             if (creado) {
                 cout << " - Valor a remover: ";
                 cin >> opcion;
-                if (IsElement(opcion, l)) {
-                    imprimir_lista(Remove(opcion, l));
+                if (isElement(opcion, l)) {
+                    imprimir_lista(remove(opcion, l));
                 } else {
                     cout << opcion << " NO pertenece a la lista";
                 }
@@ -99,13 +105,58 @@ int main() {
                 cout << " - Debe crear la lista para usar el comando.\n";
         } else if (opcion == 7) {
             if (creado) {
-                cout << "Largo de la lista: " << Length(l);
+                cout << "Largo de la lista: " << length(l);
+            } else
+                cout << " - Debe crear la lista para usar el comando.\n";
+        } else if (opcion == 8) {
+            if (creado) {
+                cout << " - Valor a ingresar: ";
+                cin >> opcion;
+                imprimir_lista(snoc(opcion, l));
             } else
                 cout << " - Debe crear la lista para usar el comando.\n";
         } else if (opcion == 9) {
             if (creado) {
                 cout << "\t-> ";
                 imprimir_lista(l);
+                cout << endl;
+            } else
+                cout << " - Debe crear la lista para usar el comando.\n";
+        } else if (opcion == 10) {
+            if (!creado2) {
+                p = null();
+                creado2 = true;
+                cout << " - Lista 2 creada.\n";
+            } else
+                cout << " - La lista 2 ya está creada.\n";
+        } else if (opcion == 14) {
+            if (creado2) {
+                cout << " - Valor a ingresar: ";
+                cin >> opcion;
+                p = cons(opcion, p);
+            } else
+                cout << " - Debe crear la lista para usar el comando.\n";
+        } else if (opcion == 15) {
+            if (creado && creado2) {
+                imprimir_lista(append(l, p));
+            } else
+                cout << " - Debe crear la lista para usar el comando.\n";
+        } else if (opcion == 16) {
+            if (creado && !isEmpty(l)) {
+                cout << "Last de l: " << last(l);
+            } else
+                cout << " - No se puede realizar.\n";
+        } else if (opcion == 17) {
+            if (creado) {
+                cout << "Valor a contar: ";
+                cin >> opcion;
+                cout << opcion << " aparece " << howMany(opcion, l) << " veces.";
+            } else
+                cout << " - No se puede realizar.\n";
+        } else if (opcion == 19) {
+            if (creado2) {
+                cout << "\t-> ";
+                imprimir_lista(p);
                 cout << endl;
             } else
                 cout << " - Debe crear la lista para usar el comando.\n";
