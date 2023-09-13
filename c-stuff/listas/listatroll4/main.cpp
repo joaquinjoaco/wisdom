@@ -12,8 +12,7 @@ void imprimir_lista(lista l) {
     // Imprime l en la salida estandar.
     while (!isEmpty(l)) {
         cout << head(l);
-        if (!isEmpty(tail(l)))
-            cout << " - ";
+        if (!isEmpty(tail(l))) cout << " - ";
         l = tail(l);
     }
     cout << endl;
@@ -24,7 +23,7 @@ int main() {
     bool creado = false;
     bool creado2 = false;
     lista l, p;
-    int opcion;
+    int opcion, opcion2;
 
     do {
         cout << "\n\n 1 - crear lista\n";
@@ -41,7 +40,14 @@ int main() {
         cout << " 15 - append 2 to 1\n";
         cout << " 16 - last\n";
         cout << " 17 - how many\n";
+        cout << " 18 - isSorted\n";
         cout << " 19 - imprimir lista 2\n";
+        cout << " 20 - insert\n";
+        cout << " 21 - change\n";
+        cout << " 22 - insBefore\n";
+        cout << " 23 - insAround\n";
+        cout << " 24 - equals\n";
+        cout << " 25 - show\n";
         cout << " 0 - salir\n";
         cout << "> ";
 
@@ -68,8 +74,7 @@ int main() {
                     cout << " - La lista NO puede ser vacia.\n";
                 else {
                     cout << "\t-> ";
-                    if (!isEmpty(tail(l)))
-                        imprimir_lista(tail(l));
+                    if (!isEmpty(tail(l))) imprimir_lista(tail(l));
                     cout << endl;
                 }
             } else
@@ -150,14 +155,76 @@ int main() {
             if (creado) {
                 cout << "Valor a contar: ";
                 cin >> opcion;
-                cout << opcion << " aparece " << howMany(opcion, l) << " veces.";
+                cout << opcion << " aparece " << howMany(opcion, l)
+                     << " veces.";
             } else
                 cout << " - No se puede realizar.\n";
+        } else if (opcion == 18) {
+            if (creado) {
+                if (isSorted(l)) {
+                    cout << "La lista está ordenada.";
+                } else {
+                    cout << "La lista NO está ordenada.";
+                }
+            } else
+                cout << " - Debe crear la lista para usar el comando.\n";
         } else if (opcion == 19) {
             if (creado2) {
                 cout << "\t-> ";
                 imprimir_lista(p);
                 cout << endl;
+            } else
+                cout << " - Debe crear la lista para usar el comando.\n";
+        } else if (opcion == 20) {
+            if (creado) {
+                if (isSorted(l)) {
+                    cout << " - Valor a ingresar ordenadamente: ";
+                    cin >> opcion;
+                    l = insert(opcion, l);
+                } else {
+                    cout << "La lista NO está ordenada.";
+                }
+            } else
+                cout << " - Debe crear la lista para usar el comando.\n";
+        } else if (opcion == 21) {
+            if (creado) {
+                cout << " - Valor a reemplazar: ";
+                cin >> opcion;
+                cout << " - Valor nuevo: ";
+                cin >> opcion2;
+                imprimir_lista(change(opcion, opcion2, l));
+            } else
+                cout << " - Debe crear la lista para usar el comando.\n";
+        } else if (opcion == 22) {
+            if (creado) {
+                cout << " - Valor a insertar: ";
+                cin >> opcion;
+                cout << " - Antes de: ";
+                cin >> opcion2;
+                imprimir_lista(insBefore(opcion, opcion2, l));
+            } else
+                cout << " - Debe crear la lista para usar el comando.\n";
+        } else if (opcion == 23) {
+            if (creado) {
+                cout << " - Valor a insertar: ";
+                cin >> opcion;
+                cout << " - Alrededor de: ";
+                cin >> opcion2;
+                imprimir_lista(insAround(opcion, opcion2, l));
+            } else
+                cout << " - Debe crear la lista para usar el comando.\n";
+        } else if (opcion == 24) {
+            if (creado && creado2) {
+                if (equals(l, p)) {
+                    cout << "La lista 'l' y la lista 'p' son iguales";
+                } else {
+                    cout << "La lista 'l' y la lista 'p' NO son iguales";
+                }
+            } else
+                cout << " - Debe crear la lista para usar el comando.\n";
+        } else if (opcion == 25) {
+            if (creado) {
+                show(l);
             } else
                 cout << " - Debe crear la lista para usar el comando.\n";
         } else if (opcion == 0) {
