@@ -33,7 +33,8 @@ int main() {
         cout << " 2 - head\n";
         cout << " 3 - tail\n";
         cout << " 4 - cons\n";
-        cout << " 5 - cantidad\n";
+        cout << " 5 - snoc\n";
+        cout << " 6 - cantidad\n";
         cout << " 9 - imprimir lista\n";
         cout << " 0 - salir\n";
         cout << "> ";
@@ -61,7 +62,11 @@ int main() {
                     cout << " - La lista NO puede ser vacia.\n";
                 else {
                     cout << "\t-> ";
-                    if (!isEmpty(tail(l))) imprimir_lista(tail(l));
+                    if (!isEmpty(tail(l))) {
+                        imprimir_lista(tail(l));
+                    } else {
+                        cout << "No quedan mas elementos.";
+                    }
                     cout << endl;
                 }
             } else
@@ -74,6 +79,13 @@ int main() {
             } else
                 cout << " - Debe crear la lista para usar el comando.\n";
         } else if (opcion == 5) {
+            if (creado) {
+                cout << " - Valor a ingresar: ";
+                cin >> opcion;
+                l = snoc(l, opcion);
+            } else
+                cout << " - Debe crear la lista para usar el comando.\n";
+        } else if (opcion == 6) {
             if (creado) {
                 cout << "La lista tiene " << cant(l) << " elementos.";
             } else

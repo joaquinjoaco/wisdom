@@ -148,6 +148,10 @@ int cant(listacirc l) {
     return cantidad;
 }
 
+bool pertenece(listacirc l, int n) {
+    // Retorna true si n pertenece a l, false en caso contrario.
+}
+
 listacirc destruir(listacirc l) {
     // Destruye l y libera la memoria asociada.
     delete l;
