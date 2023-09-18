@@ -78,18 +78,21 @@ listacirc snoc(listacirc l, int n) {
     listacirc aux = new (nodo_listacirc);
     aux->dato = n;
 
-    if (l != NULL) {
-        aux->sig = l;  // lo pone al principio
-        listacirc inicio = l;
-        // recorremos la lista hasta llegar al anterior al inicio.
-        while (l->sig != inicio) {
-            l = l->sig;
-        }
-        l->sig = aux;  // último elemento apuntará a aux.
-    } else {
+    // cambiamos punteros
+    if (l == NULL) {
         // sólo si la lista es vacía, el único elemento
         //  de la lista quedará apuntando a si mismo.
         aux->sig = aux;
+        // retornamos aux ya que la lista vino vacía.
+        l = aux;
+    } else {
+        aux->sig = l;           // lo apunta al primero
+        listacirc current = l;  // copia de 'l' para recorrer
+        // recorremos la lista hasta llegar al anterior al inicio.
+        while (current->sig != l) {
+            current = current->sig;
+        }
+        current->sig = aux;  // último elemento apuntará a aux.
     }
 
     return l;
@@ -113,19 +116,13 @@ listacirc tail(listacirc l) {
     }
 
     // Encuentra el último elemento de la lista.
-    listacirc ultimo = l;
-    while (ultimo->sig != l) {
-        ultimo = ultimo->sig;
+    listacirc current = l;
+    while (current->sig != l) {
+        current = current->sig;
     }
 
-    // Ajusta los punteros para que el último elemento apunte al segundo elemento.
-    ultimo->sig = l->sig;
-
-    // Libera la memoria del primer elemento.
-    listacirc primer_elemento = l;
-    l = l->sig;  // Avanza al segundo elemento.
-    delete primer_elemento;
-
+    current->sig = l->sig;  // último elemento apunta al segundo elemento.
+    l = l->sig;
     return l;  // Devuelve el "resto" de la lista.
 }
 
@@ -137,12 +134,10 @@ bool isEmpty(listacirc l) {
 int cant(listacirc l) {
     // Retorna la cantidad de elementos de l.
     int cantidad = 0;
-    if (l != NULL) {
-        // si 'l' tiene elementos los contaremos.
-        while (l != NULL) {
-            cantidad++;
-            l = tail(l);
-        }
+    // si 'l' tiene elementos los contaremos.
+    while (l != NULL) {
+        cantidad++;
+        l = tail(l);
     }
 
     return cantidad;
@@ -150,10 +145,20 @@ int cant(listacirc l) {
 
 bool pertenece(listacirc l, int n) {
     // Retorna true si n pertenece a l, false en caso contrario.
+    bool pertenece = false;
+    // si 'l' tiene elementos los contaremos.
+    while (l != NULL && pertenece == false) {
+        if (l->dato == n) {
+            pertenece = true;
+        }
+        l = tail(l);
+    }
+
+    return pertenece;
 }
 
 listacirc destruir(listacirc l) {
     // Destruye l y libera la memoria asociada.
-    delete l;
+    delete &l;
     return l;
 }

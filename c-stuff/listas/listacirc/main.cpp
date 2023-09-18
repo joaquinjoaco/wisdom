@@ -11,7 +11,6 @@ using namespace std;
 void imprimir_lista(listacirc l) {
     // Imprime el valor del nodo actual.
     listacirc copia = copy(l);
-    listacirc inicio = l;  // Guarda una referencia al primer nodo.
 
     while (copia != NULL) {
         cout << head(copia);
@@ -35,7 +34,9 @@ int main() {
         cout << " 4 - cons\n";
         cout << " 5 - snoc\n";
         cout << " 6 - cantidad\n";
+        cout << " 7 - isEmpty\n";
         cout << " 9 - imprimir lista\n";
+        cout << " 69 - destruir\n";
         cout << " 0 - salir\n";
         cout << "> ";
 
@@ -90,6 +91,26 @@ int main() {
                 cout << "La lista tiene " << cant(l) << " elementos.";
             } else
                 cout << " - Debe crear la lista para usar el comando.\n";
+        } else if (opcion == 7) {
+            if (creado) {
+                if (isEmpty(l)) {
+                    cout << "La es vacía.";
+                } else {
+                    cout << "La NO es vacía.";
+                }
+            } else
+                cout << " - Debe crear la lista para usar el comando.\n";
+        } else if (opcion == 8) {
+            if (creado) {
+                cout << " - Valor a buscar: ";
+                cin >> opcion;
+                if (pertenece(l, opcion)) {
+                    cout << opcion << "pertenece a la lista.";
+                } else {
+                    cout << opcion << "NO pertenece a la lista.";
+                }
+            } else
+                cout << " - Debe crear la lista para usar el comando.\n";
         } else if (opcion == 9) {
             if (creado) {
                 cout << "\t-> ";
@@ -97,6 +118,8 @@ int main() {
                 cout << endl;
             } else
                 cout << " - Debe crear la lista para usar el comando.\n";
+        } else if (opcion == 69) {
+            l = destruir(l);
         } else if (opcion == 0) {
             salir = true;
         } else
