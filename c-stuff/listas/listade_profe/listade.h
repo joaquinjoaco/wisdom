@@ -1,7 +1,15 @@
 #ifndef LISTADE_H
 #define LISTADE_H
 
-typedef struct nodo_listade* listade;
+// Estructuras de Datos y Algoritmos - Curso 2021
+// Tecnologo en Informatica FIng - DGETP - UTEC
+//
+// listade.h
+// Modulo Definicion/Especificacion
+// Lista Doblemente Encadenada de Enteros
+
+typedef struct nodo_listade * listade;
+
 
 listade crear();
 // Crea la lista doblemente encadenada vacia.
@@ -51,4 +59,6 @@ listade elim(listade l, int elem);
 listade destruir(listade l);
 // Destruye l y libera la memoria asociada.
 
+
 #endif
+

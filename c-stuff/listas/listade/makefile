@@ -1,9 +1,9 @@
 todo: main.o listade.o
 	g++ -Wall -o main main.o listade.o
-main.o: main.c
-	g++ -Wall -c main.c
-listade.o: listade.c listade.h
-	g++ -Wall -c listade.c
+main.o: main.cpp
+	g++ -Wall -c main.cpp
+listade.o: listade.cpp listade.h
+	g++ -Wall -c listade.cpp
 clean:
 	rm -f *.o
 	rm -f main

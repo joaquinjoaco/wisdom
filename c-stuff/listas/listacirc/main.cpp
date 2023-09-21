@@ -10,13 +10,19 @@ using namespace std;
 
 void imprimir_lista(listacirc l) {
     // Imprime el valor del nodo actual.
-    listacirc copia = copy(l);
 
-    while (copia != NULL) {
-        cout << head(copia);
+    // imprimimos el primero e iteraremos con el resto de la lista
+    listacirc current = tail(l);
+    cout << head(l);
+    cout << " -> ";
+
+    // hasta llegar al primero
+    while (current != l) {
+        cout << head(current);
         cout << " -> ";
-        copia = tail(copia);  // Avanza al siguiente nodo.
+        current = tail(current);
     }
+
     cout << endl;
 }
 
@@ -35,8 +41,10 @@ int main() {
         cout << " 5 - snoc\n";
         cout << " 6 - cantidad\n";
         cout << " 7 - isEmpty\n";
+        cout << " 8 - pertenece\n";
         cout << " 9 - imprimir lista\n";
-        cout << " 69 - destruir\n";
+        cout << " 10 - eliminar\n";
+        cout << " 99 - destruir\n";
         cout << " 0 - salir\n";
         cout << "> ";
 
@@ -54,7 +62,7 @@ int main() {
                 if (isEmpty(l))
                     cout << " - La lista NO puede ser vacia.\n";
                 else
-                    cout << " - " << head(l) << "\n";
+                    cout << " -> " << head(l) << "\n";
             else
                 cout << " - Debe crear la lista para usar el comando.\n";
         } else if (opcion == 3) {
@@ -63,11 +71,7 @@ int main() {
                     cout << " - La lista NO puede ser vacia.\n";
                 else {
                     cout << "\t-> ";
-                    if (!isEmpty(tail(l))) {
-                        imprimir_lista(tail(l));
-                    } else {
-                        cout << "No quedan mas elementos.";
-                    }
+                    imprimir_lista(tail(l));
                     cout << endl;
                 }
             } else
@@ -105,9 +109,9 @@ int main() {
                 cout << " - Valor a buscar: ";
                 cin >> opcion;
                 if (pertenece(l, opcion)) {
-                    cout << opcion << "pertenece a la lista.";
+                    cout << opcion << " pertenece a la lista.";
                 } else {
-                    cout << opcion << "NO pertenece a la lista.";
+                    cout << opcion << " NO pertenece a la lista.";
                 }
             } else
                 cout << " - Debe crear la lista para usar el comando.\n";
@@ -118,7 +122,18 @@ int main() {
                 cout << endl;
             } else
                 cout << " - Debe crear la lista para usar el comando.\n";
-        } else if (opcion == 69) {
+        } else if (opcion == 10) {
+            if (creado) {
+                cout << " - Valor a eliminar: ";
+                cin >> opcion;
+                if (pertenece(l, opcion)) {
+                    imprimir_lista(elim(l, opcion));
+                } else {
+                    cout << "El elemento no pertenece a la lista";
+                }
+            } else
+                cout << " - Debe crear la lista para usar el comando.\n";
+        } else if (opcion == 99) {
             l = destruir(l);
         } else if (opcion == 0) {
             salir = true;

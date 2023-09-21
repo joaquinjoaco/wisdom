@@ -105,25 +105,31 @@ int head(listacirc l) {
     return l->dato;
 }
 
+// listacirc tailTroll(listacirc l) {
+// Retorna el "resto" de la lista circular.
+// Pre: l no vacia.
+
+// Si la lista tiene un solo elemento, libera la memoria y devolvemos NULL.
+// if (l->sig == l) {
+//     delete l;
+//     return NULL;
+// }
+
+// Encuentra el último elemento de la lista.
+// listacirc current = l;
+// while (current->sig != l) {
+//     current = current->sig;
+// }
+
+// current->sig = l->sig;  // último elemento apunta al segundo elemento.
+// l = l->sig;
+// return l;  // Devuelve el "resto" de la lista.
+// }
+
 listacirc tail(listacirc l) {
     // Retorna el "resto" de la lista circular.
     // Pre: l no vacia.
-
-    // Si la lista tiene un solo elemento, libera la memoria y devuelve NULL.
-    if (l->sig == l) {
-        delete l;
-        return NULL;
-    }
-
-    // Encuentra el último elemento de la lista.
-    listacirc current = l;
-    while (current->sig != l) {
-        current = current->sig;
-    }
-
-    current->sig = l->sig;  // último elemento apunta al segundo elemento.
-    l = l->sig;
-    return l;  // Devuelve el "resto" de la lista.
+    return l->sig;
 }
 
 bool isEmpty(listacirc l) {
@@ -133,11 +139,20 @@ bool isEmpty(listacirc l) {
 
 int cant(listacirc l) {
     // Retorna la cantidad de elementos de l.
+
     int cantidad = 0;
-    // si 'l' tiene elementos los contaremos.
-    while (l != NULL) {
+
+    if (!isEmpty(l)) {
+        // contamos el primer elemento
         cantidad++;
-        l = tail(l);
+
+        // contamos el resto
+        listacirc current = tail(l);
+
+        while (current != l) {
+            cantidad++;
+            current = tail(current);
+        }
     }
 
     return cantidad;
@@ -146,19 +161,75 @@ int cant(listacirc l) {
 bool pertenece(listacirc l, int n) {
     // Retorna true si n pertenece a l, false en caso contrario.
     bool pertenece = false;
-    // si 'l' tiene elementos los contaremos.
-    while (l != NULL && pertenece == false) {
-        if (l->dato == n) {
+    listacirc current = tail(l);
+    if (l->dato == n) {
+        pertenece = true;
+    }
+    // si 'l' tiene elementos los recorremos.
+    while (current != l && pertenece == false) {
+        if (current->dato == n) {
             pertenece = true;
         }
-        l = tail(l);
+        current = tail(current);
     }
 
     return pertenece;
 }
 
+listacirc elim(listacirc l, int elem) {
+    // En caso de que elem pertenezca a l, retorna l sin ese elemento.
+
+    if (l == NULL) {
+        // La lista está vacía, no hay nada que borrar.
+        return l;
+    }
+
+    // Manejo especial para el primer elemento
+    if (head(l) == elem) {
+        listacirc temp = l;
+
+        if (l->sig == l) {
+            // Si solo hay un elemento en la lista, liberamos la memoria y devolvemos NULL.
+            delete l;
+            return NULL;
+        } else {
+            // Si hay más de un elemento, actualizamos el inicio de la lista y el último nodo.
+            listacirc ultimo = l;
+            while (ultimo->sig != l) {
+                ultimo = ultimo->sig;
+            }
+            l = l->sig;
+            ultimo->sig = l;
+            delete temp;
+        }
+    } else {
+        listacirc current = l;
+        bool borrado = false;
+
+        while (borrado == false) {
+            if (head(current) == elem) {
+                // Encontramos elem
+                listacirc ultimo = l;
+                while (ultimo->sig != current) {
+                    ultimo = ultimo->sig;
+                }
+
+                // Apuntamos el nodo anterior al siguiente del nodo a borrar
+                ultimo->sig = current->sig;
+                delete current;
+                borrado = true;
+            } else {
+                // Avanzamos al siguiente nodo en la lista
+                current = current->sig;
+            }
+        }
+    }
+
+    return l;
+}
+
 listacirc destruir(listacirc l) {
     // Destruye l y libera la memoria asociada.
-    delete &l;
+    delete l;
     return l;
 }
