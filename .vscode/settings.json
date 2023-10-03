@@ -41,5 +41,6 @@
     "stdexcept": "cpp",
     "streambuf": "cpp",
     "typeinfo": "cpp"
-  }
+  },
+  "C_Cpp.default.compilerPath": "F:\\MinGW\\bin\\g++.exe"
 }
