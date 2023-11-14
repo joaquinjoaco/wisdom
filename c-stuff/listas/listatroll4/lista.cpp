@@ -132,6 +132,8 @@ lista append(lista l, lista p) {
 lista insert(int x, lista l) {
     // Retorna la lista fruto de insertar ordenadamente el elemento x en la
     // lista ordenada l. l no comparte memoria con la lista resultado.
+
+    // 1,2,3,4,5 quiero meter el 6
     if (isEmpty(l))
         return cons(x, null());
     else if (head(l) < x)
@@ -142,6 +144,8 @@ lista insert(int x, lista l) {
         return cons(x, cons(head(l), insert(head(tail(l)), tail(l))));
     // Para que siga copiando en “if (Head(l) < x)”
 }
+
+// cons(1, cons(2, cons(3, cons(4, cons(5, cons(6, NULL)))))))
 
 int last(lista l) {
     // Retorna el último elemento.

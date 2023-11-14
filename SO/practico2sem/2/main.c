@@ -24,33 +24,43 @@
 
 // gcc -o main main.c -lpthread -lrt
 
-typedef struct carta {
-    int num;    // valor numerico
-    char palo;  // o=oro, e=espada, b=basto, c=copa
-};
+// typedef struct carta {
+//     int num;    // valor numerico
+//     char palo;  // o=oro, e=espada, b=basto, c=copa
+// };
 
-void pensar() {
-    srand(time(NULL));
-    int jugada = rand() % 10;
-    printf("pienso en %d \n", jugada);
-};
+// void pensar() {
+//     srand(time(NULL));
+//     int jugada = rand() % 10;
+//     printf("pienso en %d \n", jugada);
+// };
+
+// int main() {
+//     srand(time(NULL));
+
+//     for (int i = 0; i < 5; i++)
+//     // creamos 10 jugadores
+//     {
+//         int p = fork();
+//         if (p == 0) {  // estamos en el hijo (jugador)
+//             printf("mozo pid: %d | ppid: %d \n", getpid(), getppid());
+//             int jugada = rand() % 10;
+//             printf("pienso en %d \n", jugada);
+//             exit(-1);
+//         }
+//         if (p > 0) {
+//             // padre (no hacer nada)
+//         }
+//     }
+//     return 0;
+// }
 
 int main() {
-    srand(time(NULL));
-
-    for (int i = 0; i < 5; i++)
-    // creamos 10 jugadores
-    {
-        int p = fork();
-        if (p == 0) {  // estamos en el hijo (jugador)
-            printf("mozo pid: %d | ppid: %d \n", getpid(), getppid());
-            int jugada = rand() % 10;
-            printf("pienso en %d \n", jugada);
-            exit(-1);
-        }
-        if (p > 0) {
-            // padre (no hacer nada)
-        }
+    for (int i = 1; i < 3; i++) {
+        fork();
+        fork();
     }
+    printf("pelado\n");
+
     return 0;
 }

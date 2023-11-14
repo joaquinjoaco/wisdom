@@ -38,7 +38,6 @@ lista append(lista l, lista p);
 // Retorna la lista fruto de agregar la lista p al final de la lista l.
 // l y p no comparten memoria con la lista resultado.
 
-
 lista insert(int x, lista l);
 // Retorna la lista fruto de insertar ordenadamente el elemento x en la lista ordenada l.
 // l no comparte memoria con la lista resultado.
